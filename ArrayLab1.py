@@ -46,7 +46,7 @@ class Array(object):
 
     # ------------------------
     # ADDED: 2025-01-25, Josefina
-    # Function to insert an element at a specific position in the array
+    # Function to insert an element at a specific position in the array, and a main function to test it
     # ------------------------
     def insert_at(self, position, item):
         # Check if the position is valid
