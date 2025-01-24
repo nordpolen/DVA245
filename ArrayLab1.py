@@ -81,7 +81,7 @@ if __name__ == "__main__":
     array.insert_at(0, 0) # Insert the element '0' at the start of the array
     array.insert_at(2, 9) # Insert the element '9' in the middle of the array
     array.insert_at(5, 7) # Insert the element '7' at the end of the array
-    array.insert_at(-1, 5) # Trying to insert an element at a negative index
+    # array.insert_at(-1, 5) # Trying to insert an element at a negative index
 
     print("After insert at:")
     array.traverse()
