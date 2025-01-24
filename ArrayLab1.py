@@ -53,7 +53,7 @@ class Array(object):
         if position < 0 or position > self.__nItems:
             raise IndexError("Position if out of range")
         
-        # Move elements one step up, starting from the end, borrowing logic from the 'delete' function 
+        # Move elements one step up, starting from the end, borrowing logic from the 'delete' method 
         for i in range(self.__nItems, position, -1):
             self.__a[i] = self.__a[i - 1]
 
