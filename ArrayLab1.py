@@ -46,12 +46,12 @@ class Array(object):
 
     # ------------------------
     # ADDED: 2025-01-25, Josefina
-    # Function to insert an element at a specific position in the array, and a main function to test it
+    # Method to insert an element at a specific position in the array, and a main function to test it
     # ------------------------
     def insert_at(self, position, item):
         # Check if the position is valid
         if position < 0 or position > self.__nItems:
-            raise IndexError("Error type: 'IndexError'. Message: 'Posistion if out of range'")
+            raise IndexError("Position if out of range")
         
         # Move elements one step up, starting from the end, borrowing logic from the 'delete' function 
         for i in range(self.__nItems, position, -1):
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     # Create an Array-object
     array = Array(10)
 
-    # Add a few items
+    # Add a few items using the 'insert' method
     array.insert(1)
     array.insert(2)
     array.insert(3)
@@ -81,6 +81,7 @@ if __name__ == "__main__":
     array.insert_at(0, 0) # Insert the element '0' at the start of the array
     array.insert_at(2, 9) # Insert the element '9' in the middle of the array
     array.insert_at(5, 7) # Insert the element '7' at the end of the array
+    array.insert_at(-1, 5) # Trying to insert an element at a negative index
 
     print("After insert at:")
     array.traverse()
