@@ -65,7 +65,7 @@ class Array(object):
 
       
 if __name__ == "__main__":
-    # Create an Array-object
+    # Create an Array-object with space for 10 items
     array = Array(10)
 
     # Add a few items using the 'insert' method
