@@ -44,6 +44,10 @@ class Array(object):
         for j in range(self.__nItems):   # and apply a function
             function(self.__a[j])
 
+    # ------------------------
+    # ADDED: 2025-01-25, Josefina
+    # Function to insert an element at a specific position in the array
+    # ------------------------
     def insert_at(self, position, item):
         # Check if the position is valid
         if position < 0 or position > self.__nItems:
