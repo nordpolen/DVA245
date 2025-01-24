@@ -1,4 +1,5 @@
-# Implement an Array data structure as a simplified type of list. 
+# Implement an Array data structure as a simplified type of list.
+# The array should be able to store integers and have the following methods:
 
 class Array(object):
     def __init__(self, initialSize):    # Constructor
@@ -42,7 +43,7 @@ class Array(object):
     def traverse(self, function=print): # Traverse all items
         for j in range(self.__nItems):   # and apply a function
             function(self.__a[j])
-#Josefina Nord
+
     def insert_at(self, position, item):
         # Check if the position is valid
         if position < 0 or position > self.__nItems:
