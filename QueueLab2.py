@@ -6,6 +6,44 @@
 # removed inheritance from object since not needed in Python 3
 # using RuntimeError instead of base Exception for overflow/ underflow
 
+# ------------------------
+# ADDED: 2025-01-28, Josefina
+# 
+# ------------------------
+class Deque:
+    def __init__(self, size):
+        self.__max_size = size              # size of circular array
+        self.__deque = [None]*size          # deque stored as list
+        self.__front = 0                    # empty deque has front 0
+        self.__rear = -1                    # empty deque has rear -1
+        self.__n_items = 0                  # number of items in deque
+
+    def is_empty(self):
+        return self.__n_items == 0
+    
+    def is_full(self):
+        return self.__n_items == self.__max_size
+    
+    def __str__(self):
+        content = []
+        front = self.__front
+        for __ in range(self.__n_items):
+            content.append(self.__deque[front])
+            front = (front + 1) % self.__max_size
+        return f"{content}, front={self.__front}, rear={self.__rear}, size={self.__n_items}"
+    
+    def insert_left():
+        pass
+
+    def insert_right():
+        pass
+
+    def remove_left():
+        pass
+
+    def remove_right():
+        pass
+
 class Queue:
     def __init__(self, size):
         self.__max_size = size              # size of circular array
