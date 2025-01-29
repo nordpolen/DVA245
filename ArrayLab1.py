@@ -5,6 +5,7 @@ class Array(object):
     def __init__(self, initialSize):    # Constructor
         self.__a = [None] * initialSize  # The array stored as a list
         self.__nItems = 0                # No items in array initially
+        self.__maxSize = initialSize     # ADDED: 2025-01-29, Josefina, Maximum size of array
 
     def __len__(self):                  # Special def for len() func
         return self.__nItems             # Return number of items
@@ -49,6 +50,10 @@ class Array(object):
     # Method to insert an element at a specific position in the array, and a main function to test it
     # ------------------------
     def insert_at(self, position, item):
+        # Check if the array is full
+        if self.__nItems >= self.__maxSize:
+            raise OverflowError(f"Cannot insert at position {position}, the array is full")
+        
         # Check if the position is valid
         if position < 0 or position > self.__nItems:
             raise IndexError(f"Position ({position}) if out of range")
@@ -78,15 +83,14 @@ if __name__ == "__main__":
     array.traverse()
     print()
 
-    array.insert_at(0, 0) # Insert the element '0' at the start of the array
-    array.insert_at(2, 9) # Insert the element '9' in the middle of the array
-    array.insert_at(5, 7) # Insert the element '7' at the end of the array
+    try:
+        array.insert_at(0, 0) # Insert the element '0' at the start of the array
+        array.insert_at(2, 9) # Insert the element '9' in the middle of the array
+        array.insert_at(5, 7) # Insert the element '7' at the end of the array
+        array.insert_at(-1, 5) # Trying to insert an element at a negative index
+    except Exception as e:
+        print(f"Error: {e}")
 
     print("After insert at:")
     array.traverse()
     print()
-
-    try:
-        array.insert_at(-1, 5) # Trying to insert an element at a negative index
-    except IndexError as e:
-        print(f"Error: {e}")
