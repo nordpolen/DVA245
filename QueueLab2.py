@@ -158,7 +158,7 @@ if __name__ == "__main__":
     deque.insert_right(40)
     deque.insert_right(50)
     deque.insert_right(60)
-    print(deque) # [10, 20, 40, 50, None], front=0, rear=4, size=4
+    print(deque) # [10, 20, 40, 50, 60], front=0, rear=4, size=5
 
     try:
         deque.insert_right(70)
