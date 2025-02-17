@@ -60,9 +60,10 @@ class LinkedList:
             raise RuntimeError("No first item in empty list")
         return self.get_first().get_data()
     
-
-    # ADDED __iter__ method
-    # 2025-09-07: Changed to use recursive generator
+    # ------------------------
+    # ADDED: 2025-09-07, Josefina
+    # Method to insert an element at a specific position in the linked list, and a main function to test it
+    # ------------------------
 
     # def __iter__(self):
     #     link = self.get_first()
