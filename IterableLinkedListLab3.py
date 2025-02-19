@@ -74,7 +74,7 @@ class LinkedList:
     def iter_recursive(self, link):
         if link:
             yield link.get_data()
-            yield from self.iter_recursive(link.get_next()) # Yield from is used to delegate to another generator, instead of using a for loop
+            yield from self.iter_recursive(link.get_next()) 
         return
 
     def __iter__(self):
@@ -90,7 +90,7 @@ class LinkedList:
 
     def len_recursive(self, link):
         if link:
-            return 1 + self.len_recursive(link.get_next()) # Add 1 for each link until the end of the list
+            return 1 + self.len_recursive(link.get_next()) 
         return 0
 
     def __len__(self):
@@ -121,10 +121,10 @@ class LinkedList:
             return None
         if key(link.get_data()) == goal:
             return link
-        return self.find_recursive(link.get_next(), goal, key) # Recursively check the next link
+        return self.find_recursive(link.get_next(), goal, key) 
 
     def find(self, goal, key=identity):
-        return self.find_recursive(self.get_first(), goal, key) # Start the recursive search from the first link
+        return self.find_recursive(self.get_first(), goal, key) 
         
     def search(self, goal, key=identity):
         link = self.find(goal, key)
@@ -173,14 +173,14 @@ class LinkedList:
         if current is None:
             raise RuntimeError("No item with matching key found in list")
         if goal == key(current.get_data()):
-            previous.set_next(current.get_next()) # Update the next reference of the previous link to the next link
-            return current.get_data() # Return data of deleted link
-        return self.delete_recursive(current, current.get_next(), goal, key) # Recursively check the next link
+            previous.set_next(current.get_next()) 
+            return current.get_data() 
+        return self.delete_recursive(current, current.get_next(), goal, key) 
 
     def delete(self, goal, key=identity):
         if self.is_empty():
             raise RuntimeError("Cannot delete from empty list")
-        return self.delete_recursive(self, self.get_next(), goal, key) # self is the previous link, and the search starts from the first link, which is the next link of self
+        return self.delete_recursive(self, self.get_next(), goal, key) 
     
 
 if __name__ == '__main__':
@@ -225,9 +225,11 @@ if __name__ == '__main__':
     print("linked_list after deletions: ", str(linked_list))
     for i in [2, 5, 8, 9]:
         print("search returned False:", linked_list.search(i) == False)
-
-
     
 
-
-
+    # Test deleting from an empty list
+    empty_list = LinkedList()
+    try:
+        empty_list.delete(1)
+    except RuntimeError:
+        print("Correctly raised an error on deleting from an empty list.")
