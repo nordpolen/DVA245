@@ -153,6 +153,18 @@ def main():
     print(f'Expression: {tree.to_string()}')
     print(f'Result: {tree.evaluate()}')
 
+    # tokens = tokenize('+')
+    # print(f'Tokens: {tokens}')
+    # tree = build_expression_tree(tokens)
+    # print(f'Expression: {tree}')
+    # print(f'Result: {tree.evaluate()}')
+
+    # tokens = tokenize('5')
+    # print(f'Tokens: {tokens}')
+    # tree = build_expression_tree(tokens)
+    # print(f'Expression: {tree.to_string()}')
+    # print(f'Result: {tree.evaluate()}')
+
 if __name__ == "__main__":
     main()
     
