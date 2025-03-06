@@ -66,7 +66,7 @@ class OperatorNode(Node):
         self._left = left_operand # Left operand (Node)
         self._right = right_operand # Right operand (Node)
 
-    def to_string(self):
+    def to_string(self): # ((a+b)*(c-d))
         # Return a string representation of the expression
         return '({} {} {})'.format(self._left.to_string(), self._operator, self._right.to_string())
 
@@ -118,7 +118,7 @@ def is_operator(token):
     return token in '+-*/'
 
 # Function to build an expression tree from a list of tokens.
-def build_expression_tree(tokens):
+def build_expression_tree(tokens): # ((a+b)*(c-d))
     """
     Function that constructs an expression tree from a list of tokens.
     Uses a stack to keep track of nodes and operators.
