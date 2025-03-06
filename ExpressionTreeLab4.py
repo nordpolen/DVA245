@@ -147,14 +147,13 @@ def build_expression_tree(tokens):
 
 
 def main():
-    # test_expression_string= '(((3+5)/(5-3))+((2*5)-(9-4)))'
-    # tokens = tokenize(test_expression_string)
-    # print(f'Tokens: {tokens}')
+    test_expression_string= '(((3+5)/(5-3))+((2*5)-(9-4)))'
+    tokens = tokenize(test_expression_string)
+    print(f'Tokens: {tokens}')
 
-    # # ADDED: print the tokens
-    # tree = build_expression_tree(tokens)
-    # print(f'Expression: {tree.to_string()}')
-    # print(f'Result: {tree.evaluate()}')
+    tree = build_expression_tree(tokens)
+    print(f'Expression: {tree.to_string()}')
+    print(f'Result: {tree.evaluate()}')
 
     # tokens = tokenize('+')
     # print(f'Tokens: {tokens}')
@@ -162,11 +161,11 @@ def main():
     # print(f'Expression: {tree}')
     # print(f'Result: {tree.evaluate()}')
 
-    tokens = tokenize('5.5')
-    print(f'Tokens: {tokens}')
-    tree = build_expression_tree(tokens)
-    print(f'Expression: {tree.to_string()}')
-    print(f'Result: {tree.evaluate()}')
+    # tokens = tokenize('5.5')
+    # print(f'Tokens: {tokens}')
+    # tree = build_expression_tree(tokens)
+    # print(f'Expression: {tree.to_string()}')
+    # print(f'Result: {tree.evaluate()}')
 
 if __name__ == "__main__":
     main()
