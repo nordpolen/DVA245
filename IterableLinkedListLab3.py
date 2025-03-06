@@ -60,19 +60,41 @@ class LinkedList:
             raise RuntimeError("No first item in empty list")
         return self.get_first().get_data()
     
-    def __iter__(self):
-        link = self.get_first()
-        while link:
+    # ------------------------
+    # ADDED: 2025-09-07, Josefina
+    # Method to insert an element at a specific position in the linked list, and a main function to test it
+    # ------------------------
+
+    # def __iter__(self):
+    #     link = self.get_first()
+    #     while link:
+    #         yield link.get_data()
+    #         link = link.get_next()´
+
+    def iter_recursive(self, link):
+        if link:
             yield link.get_data()
-            link = link.get_next()
+            yield from self.iter_recursive(link.get_next()) 
+        return
+
+    def __iter__(self):
+        return self.iter_recursive(self.get_first())
+
+    # def __len__(self):
+    #     length = 0
+    #     link = self.get_first()
+    #     while link:
+    #         length += 1
+    #         link = link.get_next()
+    #     return length
+
+    def len_recursive(self, link):
+        if link:
+            return 1 + self.len_recursive(link.get_next()) 
+        return 0
 
     def __len__(self):
-        length = 0
-        link = self.get_first()
-        while link:
-            length += 1
-            link = link.get_next()
-        return length
+        return self.len_recursive(self.get_first())
     
     def __str__(self):
         result = "["
@@ -87,12 +109,22 @@ class LinkedList:
         link = Link(data, self.get_first())
         self.set_first(link)
 
+    # def find(self, goal, key=identity):
+    #     link = self.get_first()
+    #     while link:
+    #         if key(link.get_data()) == goal:
+    #             return link
+    #         link = link.get_next()
+
+    def find_recursive(self, link, goal, key):
+        if link is None:
+            return None
+        if key(link.get_data()) == goal:
+            return link
+        return self.find_recursive(link.get_next(), goal, key) 
+
     def find(self, goal, key=identity):
-        link = self.get_first()
-        while link:
-            if key(link.get_data()) == goal:
-                return link
-            link = link.get_next()
+        return self.find_recursive(self.get_first(), goal, key) 
         
     def search(self, goal, key=identity):
         link = self.find(goal, key)
@@ -118,24 +150,37 @@ class LinkedList:
         return first.get_data()    # Return data of deleted link
         
 
-    # changed to use previous and current, a little more clear
+    # # changed to use previous and current, a little more clear
+    # def delete(self, goal, key=identity):
+    #     if self.is_empty():
+    #         raise RuntimeError("Cannot delete from empty list")
+    #     # Link before goal link
+    #     # At first LinkedList (self), works because we implemented 
+    #     # get_next and set_next for LinkedList
+    #     previous = self
+    #     current = self.get_next()
+    #     # We need to track previous to update the next reference at deletion
+    #     while current:
+    #         if goal == key(current.get_data()): # Found the link to delete
+    #             previous.set_next(current.get_next())
+    #             return current.get_data()  # Return data of deleted link
+    #         previous = current       # step to check next link
+    #         current = current.get_next()
+    #     # goal not found, raise exception
+    #     raise RuntimeError("No item with matching key found in list")
+
+    def delete_recursive(self, previous, current, goal, key):
+        if current is None:
+            raise RuntimeError("No item with matching key found in list")
+        if goal == key(current.get_data()):
+            previous.set_next(current.get_next()) 
+            return current.get_data() 
+        return self.delete_recursive(current, current.get_next(), goal, key) 
+
     def delete(self, goal, key=identity):
         if self.is_empty():
             raise RuntimeError("Cannot delete from empty list")
-        # Link before goal link
-        # At first LinkedList (self), works because we implemented 
-        # get_next and set_next for LinkedList
-        previous = self
-        current = self.get_next()
-        # We need to track previous to update the next reference at deletion
-        while current:
-            if goal == key(current.get_data()): # Found the link to delete
-                previous.set_next(current.get_next())
-                return current.get_data()  # Return data of deleted link
-            previous = current       # step to check next link
-            current = current.get_next()
-        # goal not found, raise exception
-        raise RuntimeError("No item with matching key found in list")
+        return self.delete_recursive(self, self.get_next(), goal, key) 
     
 
 if __name__ == '__main__':
@@ -180,9 +225,11 @@ if __name__ == '__main__':
     print("linked_list after deletions: ", str(linked_list))
     for i in [2, 5, 8, 9]:
         print("search returned False:", linked_list.search(i) == False)
-
-
     
 
-
-
+    # Test deleting from an empty list
+    empty_list = LinkedList()
+    try:
+        empty_list.delete(1)
+    except RuntimeError:
+        print("Correctly raised an error on deleting from an empty list.")
