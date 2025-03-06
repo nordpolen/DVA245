@@ -39,7 +39,7 @@ class Node:
         """Return a numeric result of the expression."""
         raise NotImplementedError('must be implemented by subclass')
 
-# Class to represent a numeric node and an operator node in an expression tree.
+# Class to represent a numeric node in an expression tree.
 class NumericNode(Node):
     """
     Class representing a numeric node (leaf) in the expression tree.
@@ -129,8 +129,11 @@ def build_expression_tree(tokens):
         if is_operator(token):
             stack.append(token) # Push operator onto the stack
         elif token.isnumeric():
-            node = NumericNode(token) # Create a numeric node
-            stack.append(node)
+            try:
+                node = NumericNode(token) # Create a numeric node
+                stack.append(node)
+            except ValueError:
+                raise ValueError(f"Invalid token in expression: {token}")
         elif token == ')':
             # Pop the right operand, operator, and left operand
             right = stack.pop()
@@ -144,14 +147,14 @@ def build_expression_tree(tokens):
 
 
 def main():
-    test_expression_string= '(((3+5)/(5-3))+((2*5)-(9-4)))'
-    tokens = tokenize(test_expression_string)
-    print(f'Tokens: {tokens}')
+    # test_expression_string= '(((3+5)/(5-3))+((2*5)-(9-4)))'
+    # tokens = tokenize(test_expression_string)
+    # print(f'Tokens: {tokens}')
 
-    # ADDED: print the tokens
-    tree = build_expression_tree(tokens)
-    print(f'Expression: {tree.to_string()}')
-    print(f'Result: {tree.evaluate()}')
+    # # ADDED: print the tokens
+    # tree = build_expression_tree(tokens)
+    # print(f'Expression: {tree.to_string()}')
+    # print(f'Result: {tree.evaluate()}')
 
     # tokens = tokenize('+')
     # print(f'Tokens: {tokens}')
@@ -159,11 +162,11 @@ def main():
     # print(f'Expression: {tree}')
     # print(f'Result: {tree.evaluate()}')
 
-    # tokens = tokenize('5')
-    # print(f'Tokens: {tokens}')
-    # tree = build_expression_tree(tokens)
-    # print(f'Expression: {tree.to_string()}')
-    # print(f'Result: {tree.evaluate()}')
+    tokens = tokenize('5.5')
+    print(f'Tokens: {tokens}')
+    tree = build_expression_tree(tokens)
+    print(f'Expression: {tree.to_string()}')
+    print(f'Result: {tree.evaluate()}')
 
 if __name__ == "__main__":
     main()
