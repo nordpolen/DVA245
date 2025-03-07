@@ -43,7 +43,7 @@ def merge_level_queues(level_queues):
         q2 = level_queues.popleft()
         next_level_queues.append(merge(q1, q2))
     if level_queues:
-        next_level_queues.append(merge(level_queues.popleft()))
+        next_level_queues.append(level_queues.popleft())
     return next_level_queues
   
 
