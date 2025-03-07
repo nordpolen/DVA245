@@ -34,8 +34,16 @@ def merge_level_queues(level_queues):
     into a new queue with about half the number of sorted 
     queues. level_queues is left empty."""
     next_level_queues = deque()
-    # TODO add the functionality that merges the queues of level_queues
-    # into next_level_queues
+    # ------------------------
+    # ADDED: 2025-03-07, Josefina
+    # Functionality that merges the queues in level_queues two by two into next_level_queues.
+    # ------------------------
+    while len(level_queues) > 1:
+        q1 = level_queues.popleft()
+        q2 = level_queues.popleft()
+        next_level_queues.append(merge(q1, q2))
+    if level_queues:
+        next_level_queues.append(merge(level_queues.popleft()))
     return next_level_queues
   
 
