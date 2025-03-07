@@ -11,7 +11,22 @@ def merge(S1, S2):
        Leaves S1 and S2 empty.
        Queues are deques used with the front to the left."""
     S = deque()
-    # TODO add the functionality that merges S1 and S2 into S
+    # ------------------------
+    # ADDED: 2025-03-07, Josefina
+    # Functionality that merges S1 and S2 into S.
+    # ------------------------
+    while S1 and S2:
+        if S1[0] <= S2[0]: # Compare the first element of each queue and append the smaller one to S
+            S.append(S1.popleft()) 
+        else:
+            S.append(S2.popleft()) 
+
+    # Append the remaining elements of S1 and S2 to S
+    while S1:
+        S.append(S1.popleft())
+    while S2:
+        S.append(S2.popleft())
+
     return S
   
 def merge_level_queues(level_queues):
