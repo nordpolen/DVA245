@@ -10,7 +10,7 @@ def merge(S1, S2):
        Result is returned in a new sorted queue.
        Leaves S1 and S2 empty.
        Queues are deques used with the front to the left."""
-    S = deque() # Create a new empty queue for the sorted elements
+    S = deque() # Create a new empty queue for the sorted elements 
     # ------------------------
     # ADDED: 2025-03-07, Josefina
     # Functionality that merges S1 and S2 into S.
@@ -19,7 +19,7 @@ def merge(S1, S2):
         if S1[0] <= S2[0]: # Compare the first element of each queue
             S.append(S1.popleft()) # Append the smallest element to S and remove it from the original queue
         else:
-            S.append(S2.popleft()) # Append the smallest element to S and remove it from the original queue
+            S.append(S2.popleft()) 
 
     # Append any remaining elements of S1 and S2 to S
     while S1:
@@ -39,7 +39,7 @@ def merge_level_queues(level_queues):
     # Functionality that merges the queues in level_queues two by two into next_level_queues.
     # ------------------------
     # Merge queues two by two
-    while len(level_queues) > 1:
+    while len(level_queues) > 1: # While there are at least two queues left
         q1 = level_queues.popleft() # Get the first queue
         q2 = level_queues.popleft() # Get the second queue
         next_level_queues.append(merge(q1, q2)) # Merge the two queues and append the result to next_level_queues
@@ -69,18 +69,20 @@ def merge_sort(S):
     # ------------------------
     # Repeat until only one sorted queue remains
     while len(level_queues) > 1:
-        next_level_queues = deque() # Create a new level of queues
+        # next_level_queues = deque() # Create a new level of queues
 
-        while len(level_queues) > 1: # While there are at least two queues left
-            q1 = level_queues.popleft() # Get the first queue
-            q2 = level_queues.popleft() # Get the second queue
-            next_level_queues.append(merge(q1, q2)) # Merge them and add to the next level
+        # while len(level_queues) > 1: # While there are at least two queues left
+        #     q1 = level_queues.popleft() # Get the first queue
+        #     q2 = level_queues.popleft() # Get the second queue
+        #     next_level_queues.append(merge(q1, q2)) # Merge them and add to the next level
         
-        # If one queue remains, append it to the next level without merging
-        if level_queues:
-            next_level_queues.append(level_queues.popleft())
+        # # If one queue remains, append it to the next level without merging
+        # if level_queues:
+        #     next_level_queues.append(level_queues.popleft())
         
-        level_queues = next_level_queues # Update the level_queues to the next level
+        # level_queues = next_level_queues # Update the level_queues to the next level
+
+        level_queues = merge_level_queues(level_queues) # Merge the current level of queues
 
     # ------------------------
     # Step 3: Dequeue and return the single remaining merged queue
